@@ -5,25 +5,21 @@ import Header from './components/header/Header'
 import Footer from './components/Footer.jsx/Footer'
 import SideBar from './components/sidebar/SideBar'
 import MovieList from './components/movieList/MovieList'
-import { CartContext } from './context'
+import { CartContext, ThemeContext } from './context'
+import Page from './Page'
 
 function App() {
   const [cartItems, setCartItems] = useState([])
+  const [darkMode, setDarkMode] = useState(true)
   const value = { cartItems, setCartItems }
 
   return (
-    <CartContext.Provider value={value}>
-      <Header />
-      <main>
-        <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
+    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+      <CartContext.Provider value={value}>
 
-          <SideBar />
-          <MovieList />
-        </div>
-
-      </main>
-      <Footer />
-    </CartContext.Provider>
+        <Page />
+      </CartContext.Provider>
+    </ThemeContext.Provider>
   )
 }
 
